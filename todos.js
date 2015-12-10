@@ -7,8 +7,8 @@ $(function(){
     defaults: function() {
       return {
         title: "empty todo...",
-        order: Todos.nextOrder(),
-        done: false
+        order: Todos.nextOrder(),// 建立顺序，知道下一个在哪
+        done: false// 开关，哪些已经保存好了，哪些还没有进行保存操作
       };
     },
 
