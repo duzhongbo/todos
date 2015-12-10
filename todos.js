@@ -67,9 +67,9 @@ $(function(){
   // 视图，每个单元小视图
   var TodoView = Backbone.View.extend({
 
-    tagName:  "li",
+    tagName:  "li",// 指定视图的标签
 
-    template: _.template($('#item-template').html()),
+    template: _.template($('#item-template').html()),// 针对一个模型的模板
     // 每个小视图上的事件：1、点击(多选框)；2、双击；3、点击(删除)；4、回车更新；5、失去焦点
     events: {
       "click .toggle"   : "toggleDone",
@@ -91,7 +91,7 @@ $(function(){
       return this;
     },
 
-    toggleDone: function() {// 状态切换
+    toggleDone: function() {// 模型是否要保存，完成还是没完成
       this.model.toggle();
     },
 
