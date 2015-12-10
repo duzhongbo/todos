@@ -80,24 +80,24 @@ $(function(){
     },
 
     initialize: function() {
-      this.listenTo(this.model, 'change', this.render);
-      this.listenTo(this.model, 'destroy', this.remove);
+      this.listenTo(this.model, 'change', this.render);//发生改变时，渲染方法
+      this.listenTo(this.model, 'destroy', this.remove);//发生删除时，移除方法
     },
 
     render: function() {
-      this.$el.html(this.template(this.model.toJSON()));
-      this.$el.toggleClass('done', this.model.get('done'));
-      this.input = this.$('.edit');
+      this.$el.html(this.template(this.model.toJSON()));// 渲染模板
+      this.$el.toggleClass('done', this.model.get('done'));// 改变状态
+      this.input = this.$('.edit');// 输入框编辑状态
       return this;
     },
 
-    toggleDone: function() {
+    toggleDone: function() {// 状态切换
       this.model.toggle();
     },
 
     edit: function() {
-      this.$el.addClass("editing");
-      this.input.focus();
+      this.$el.addClass("editing"); // 标题变成编辑状态
+      this.input.focus();// 标题输入框得到焦点
     },
 
     close: function() {
@@ -105,8 +105,8 @@ $(function(){
       if (!value) {
         this.clear();
       } else {
-        this.model.save({title: value});
-        this.$el.removeClass("editing");
+        this.model.save({title: value});// 保存数据
+        this.$el.removeClass("editing");// 移除输入框编辑状态
       }
     },
 
