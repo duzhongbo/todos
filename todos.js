@@ -32,24 +32,24 @@ $(function(){
   // 数据结合
   var TodoList = Backbone.Collection.extend({
 
-    model: Todo,
+    model: Todo,// 指定模型是哪个模型，哪个对象
 
-    localStorage: new Backbone.LocalStorage("todos-backbone"),
+    localStorage: new Backbone.LocalStorage("todos-backbone"),// 指定一下同步服务器的方式
 
-    done: function() {
+    done: function() {// 获取哪些已经完成了
       return this.where({done: true});
     },
 
-    remaining: function() {
+    remaining: function() {// 哪些没有完成
       return this.where({done: false});
     },
 
-    nextOrder: function() {
+    nextOrder: function() {// 找到对应的顺序
       if (!this.length) return 1;
       return this.last().get('order') + 1;
     },
 
-    comparator: 'order'
+    comparator: 'order' // 默认的排序方式
 
   });
 
