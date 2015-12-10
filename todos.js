@@ -136,14 +136,14 @@ $(function(){
   // 视图，整个应用视图
   var AppView = Backbone.View.extend({
 
-    el: $("#todoapp"),
+    el: $("#todoapp"),//  整体操作，代理帮到父级
 
-    statsTemplate: _.template($('#stats-template').html()),
+    statsTemplate: _.template($('#stats-template').html()),// 模板，页脚一块
 
     events: {
-      "keypress #new-todo":  "createOnEnter",
-      "click #clear-completed": "clearCompleted",
-      "click #toggle-all": "toggleAllComplete"
+      "keypress #new-todo":  "createOnEnter",// 输入框按回车就是创建一个模型(数据)li
+      "click #clear-completed": "clearCompleted",// 删除，完成所有完成的的
+      "click #toggle-all": "toggleAllComplete"// 全选，对应完成与未完成的切换
     },
 
     initialize: function() {
@@ -151,19 +151,19 @@ $(function(){
       this.input = this.$("#new-todo");
       this.allCheckbox = this.$("#toggle-all")[0];
 
-      this.listenTo(Todos, 'add', this.addOne);
-      this.listenTo(Todos, 'reset', this.addAll);
-      this.listenTo(Todos, 'all', this.render);
+      this.listenTo(Todos, 'add', this.addOne);// 结合的添加
+      this.listenTo(Todos, 'reset', this.addAll);// 集合的更新
+      this.listenTo(Todos, 'all', this.render);// 任何操作，都触发
 
       this.footer = this.$('footer');
       this.main = $('#main');
 
-      Todos.fetch();
+      Todos.fetch();// 更新服务器数据(本例，是本地数据)
     },
 
     render: function() {
-      var done = Todos.done().length;
-      var remaining = Todos.remaining().length;
+      var done = Todos.done().length;// 哪些完成了，对应到页脚
+      var remaining = Todos.remaining().length; // 哪些没完成，对应到页脚
 
       if (Todos.length) {
         this.main.show();
@@ -177,7 +177,7 @@ $(function(){
       this.allCheckbox.checked = !remaining;
     },
 
-    addOne: function(todo) {
+    addOne: function(todo) {// 添加一条数据对应的回调
       var view = new TodoView({model: todo});
       this.$("#todo-list").append(view.render().el);
     },
@@ -186,7 +186,7 @@ $(function(){
       Todos.each(this.addOne, this);
     },
 
-    createOnEnter: function(e) {
+    createOnEnter: function(e) {// 回车的时候添加数据
       if (e.keyCode != 13) return;
       if (!this.input.val()) return;
 
@@ -194,7 +194,7 @@ $(function(){
       this.input.val('');
     },
 
-    clearCompleted: function() {
+    clearCompleted: function() {// 数据删除操作
       _.invoke(Todos.done(), 'destroy');
       return false;
     },
@@ -206,6 +206,6 @@ $(function(){
 
   });
 
-  var App = new AppView;
+  var App = new AppView;// 调整体视图
 
 });
