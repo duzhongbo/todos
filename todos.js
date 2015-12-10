@@ -70,7 +70,7 @@ $(function(){
     tagName:  "li",
 
     template: _.template($('#item-template').html()),
-
+    // 每个小视图上的事件：1、点击(多选框)；2、双击；3、点击(删除)；4、回车更新；5、失去焦点
     events: {
       "click .toggle"   : "toggleDone",
       "dblclick .view"  : "edit",
