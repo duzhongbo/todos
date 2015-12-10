@@ -13,7 +13,7 @@ $(function(){
     },
 
     toggle: function() {
-      this.save({done: !this.get("done")});
+      this.save({done: !this.get("done")});// 改变一下保存开关的真假，复选框的选中与取消选中
     }
 
   });
